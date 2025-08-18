@@ -5,26 +5,40 @@ void	add(Phonebook& pb){
 		pb.index = 7;
 	std::cout<<"first name: ";
 	std::getline(std::cin, pb.contact[pb.index].first_name);
+	if (pb.contact[pb.index].first_name.empty()){
+		std::cout <<"Invalid input\n"; return;}
 	std::cout<<"last name: ";
 	std::getline(std::cin, pb.contact[pb.index].last_name);
+	if (pb.contact[pb.index].last_name.empty()){
+		std::cout <<"Invalid input\n"; return;}
 	std::cout<<"nackname: ";
 	std::getline(std::cin, pb.contact[pb.index].nickname);
+	if (pb.contact[pb.index].nickname.empty()){
+		std::cout <<"Invalid input\n"; return;}
 	std::cout<<"phone number: ";
 	std::getline(std::cin, pb.contact[pb.index].phone);
+	if (pb.contact[pb.index].phone.empty()){
+		std::cout <<"Invalid input\n"; return;}
 	std::cout<<"darkest secret: ";
 	std::getline(std::cin, pb.contact[pb.index].secret);
+	if (pb.contact[pb.index].secret.empty()){
+		std::cout <<"Invalid input\n"; return;}
 	pb.index++;
 }
+
 void	search(Phonebook& pb){
 	std::string out;
+	std::cout<<"SEARCH >>";
 	std::getline(std::cin, out);
+	if (out.empty()){
+		std::cout <<"Invalid input\n"; return;}
 	int i=0;
 	for(; i < 8; i++){
 		if (out.compare(pb.contact[i].first_name) == 0)
 			break;
 	}
-	if (i > 7)
-		std::cout<<"name doesn't found\n";
+	if (i > 7){
+		std::cout<<"name doesn't found\n"; return;}
 	std::cout<<"First Name: "<<pb.contact[i].first_name<<"\n";
 	std::cout<<"Last Name: "<<pb.contact[i].last_name<<"\n";
 	std::cout<<"Nickname: "<<pb.contact[i].nickname<<"\n";
