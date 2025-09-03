@@ -1,6 +1,6 @@
 CC = g++ -std=c++98
-NAME = PhoneBook
-SRC = PhoneBook.cpp Contact.cpp
+NAME = Zombie
+SRC = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp 
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)

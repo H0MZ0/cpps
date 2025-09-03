@@ -1,6 +1,6 @@
 CC = g++ -std=c++98
-NAME = PhoneBook
-SRC = PhoneBook.cpp Contact.cpp
+NAME = zombieHorde
+SRC = main.cpp Zombie.cpp zombieHorde.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
