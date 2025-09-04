@@ -1,10 +1,7 @@
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <iostream>
+#include "Replace.hpp"
 
-int main(int ac, char **av) {
-    if (ac != 4) {
+int main(int ac, char **av){	
+	if (ac != 4) {
         std::cerr << "Invalid arguments\n";
         return 1;
     }

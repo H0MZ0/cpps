@@ -1,12 +1,11 @@
 #include "HumanB.hpp"
 
-void	HumanB::setType( std::string n ){
-	name = n;
-}
+HumanB::HumanB( std::string n ) : name(n), weapon(weapon){}
 
 void	HumanB::attack( void ){
-    std::cout << name << " attacks with their " << weapon << std::endl;
+    std::cout << name << " attacks with their " <<  weapon.getType() << std::endl;
 }
 
-void	HumanB::setWeapon( class Weapon ){
+void	HumanB::setWeapon( Weapon& weapon ){
+	weapon.setType("no weapon");
 }

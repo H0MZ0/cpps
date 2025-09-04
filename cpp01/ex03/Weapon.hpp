@@ -4,13 +4,13 @@
 
 class Weapon
 {
-    private:
-        std::string type;
+	private:
+		std::string type;
 
-    public:
-        Weapon(std::string n);
-        static std::string const&  getType();
-        void                setType(std::string n);
+	public:
+		Weapon(std::string n);
+		std::string const&	getType();
+		void				setType(std::string n);
 };
 
 

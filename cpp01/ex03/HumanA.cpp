@@ -1,17 +1,7 @@
 #include "HumanA.hpp"
 
-HumanA::HumanA( std::string w ){
-	weapon = w;
-}
-
-void	HumanA::setType( std::string n ){
-	name = n;
-}
+HumanA::HumanA(std::string w, Weapon& weapon) : name(w), weapon(weapon) {}
 
 void	HumanA::attack( void ){
-    std::cout << name << " attacks with their " << weapon << std::endl;
-}
-
-void	HumanA::setWeapon( class Weapon ){
-	weapon = Weapon::getType();
+    std::cout << name << " attacks with their " << weapon.getType() << std::endl;
 }
