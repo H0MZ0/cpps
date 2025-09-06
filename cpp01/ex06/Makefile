@@ -1,5 +1,5 @@
 CC = g++ -std=c++98
-NAME = Replace
+NAME = harlFilter
 SRC = main.cpp Harl.cpp
 OBJ = $(SRC:.cpp=.o)
 

@@ -16,28 +16,35 @@ bool	PhoneBook::is_empty()
 	return false;
 }
 
-void	PhoneBook::ADD(){
-	if (index == 8) index = 0;
-	std::string out;
-	std::cout<<"first name: ";
-	std::getline(std::cin, out);
-	contact[index].setFirstName(out);
-	std::cout<<"last name: ";
-	std::getline(std::cin, out);
-	contact[index].setLastName(out);
-	std::cout<<"nickname: ";
-	std::getline(std::cin, out);
-	contact[index].setNickname(out);
-	std::cout<<"phone: ";
-	std::getline(std::cin, out);
-	contact[index].setPhone(out);
-	std::cout<<"secret: ";	
-	std::getline(std::cin, out);
-	contact[index].setSecret(out);
-	if (is_empty()) return;
-	index++;
-	if (index == 8) flag = 1;
+void PhoneBook::ADD() {
+    if (index == 8) index = 0;
+    std::string out;
+
+    std::cout << "first name: ";
+    if (!std::getline(std::cin, out)) return;
+    contact[index].setFirstName(out);
+
+    std::cout << "last name: ";
+    if (!std::getline(std::cin, out)) return;
+    contact[index].setLastName(out);
+
+    std::cout << "nickname: ";
+    if (!std::getline(std::cin, out)) return;
+    contact[index].setNickname(out);
+
+    std::cout << "phone: ";
+    if (!std::getline(std::cin, out)) return;
+    contact[index].setPhone(out);
+
+    std::cout << "secret: ";
+    if (!std::getline(std::cin, out)) return;
+    contact[index].setSecret(out);
+
+    if (is_empty()) return;
+    index++;
+    if (index == 8) flag = 1;
 }
+
 
 void	write_range(std::string out){
 	int	i = 0;

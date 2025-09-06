@@ -1,20 +1,20 @@
 #include "Harl.hpp"
 
 void Harl::debug( void ){
-	std::cout << "\"DEBUG\" level: " << "Hey BRO make it correctly" << std::endl;
+	std::cout << "[ DEBUG ]\n" << "Hey BRO make it correctly" << std::endl;
 }
 
 void Harl::info( void ){
-	std::cout << "\"INFO\" level: " << "Nice you are in it !" << std::endl;
+	std::cout << "[ INFO ]\n" << "Nice you are in it !" << std::endl;
 }
 
 void Harl::warning( void ){
-	std::cout << "\"WARNING\" level: " << "Are you stupid" << std::endl;
+	std::cout << "[ WARNING ]\n" << "Are you stupid" << std::endl;
 
 }
 
 void Harl::error( void ){
-	std::cout << "\"ERROR\" level: " << "Dont't be like SAID" << std::endl;
+	std::cout << "[ ERROR ]\n" << "Dont't be like SAID" << std::endl;
 }
 
 void Harl::complain( std::string level ){

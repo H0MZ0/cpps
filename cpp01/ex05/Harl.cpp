@@ -30,7 +30,3 @@ void Harl::complain( std::string level ){
 	std::cout << "[ Invalid Case ]\n";
 }
 
-std::string Harl::operator == (std::string &str)
-{
-	
-}
