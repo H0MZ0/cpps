@@ -6,6 +6,13 @@ int main(int ac, char **av){
         return 1;
     }
 
+    std::string s1 = av[2];
+    std::string s2 = av[3];
+
+    if (s1.empty() || s2.empty()){
+        std::cerr << "Error" << std::endl;
+        return 1;
+    }
     std::string newNameFile = std::string(av[1]) + ".replace";
     std::ifstream inFile(av[1]);
     if (!inFile) {
@@ -21,10 +28,6 @@ int main(int ac, char **av){
     std::stringstream buffer;
     buffer << inFile.rdbuf();
     std::string content = buffer.str();
-
-    std::string s1 = av[2];
-    std::string s2 = av[3];
-
     size_t pos = 0;
     while ((pos = content.find(s1, pos)) != std::string::npos) {
         content.erase(pos, s1.length());
