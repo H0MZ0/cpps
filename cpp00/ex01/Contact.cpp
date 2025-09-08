@@ -1,6 +1,7 @@
 #include "PhoneBook.hpp"
 #include "Contacts.hpp"
 
+/*SETTERS*/
 void    Contacts::setFirstName( std::string n){
     first_name = n;
 }
@@ -16,7 +17,8 @@ void    Contacts::setPhone(std::string n){
 void    Contacts::setSecret(std::string n){
     secret = n;
 }
-std::string    Contacts::getFistName(){
+/*GETTERS*/
+std::string    Contacts::getFirstName(){
     return first_name;
 }
 std::string    Contacts::getLastName(){

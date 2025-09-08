@@ -1,5 +1,6 @@
 #include <iostream>
 int main(int ac, char **av){
+    (void)av;
     if (ac == 1) return std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n", 1;
     int upper;
     for (int i = 1; av[i]; i++){

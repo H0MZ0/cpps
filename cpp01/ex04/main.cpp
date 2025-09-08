@@ -9,7 +9,7 @@ int main(int ac, char **av){
     std::string s1 = av[2];
     std::string s2 = av[3];
 
-    if (s1.empty() || s2.empty()){
+    if (std::string(av[2]).empty()){
         std::cerr << "Error" << std::endl;
         return 1;
     }

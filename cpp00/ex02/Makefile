@@ -1,4 +1,5 @@
-CC = g++ -std=c++98
+C++ = c++
+FLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = Account
 SRC = Account.cpp tests.cpp
 OBJ = $(SRC:.cpp=.o)
@@ -6,10 +7,10 @@ OBJ = $(SRC:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME)
+	$(C++) $(FLAGS) $(OBJ) -o $(NAME)
 
 %.o: %.cpp
-	$(CC) -c $< -o $@
+	$(C++) $(FLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
@@ -17,6 +18,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean all
+re: all fclean clean
 
 .SECONDARY:

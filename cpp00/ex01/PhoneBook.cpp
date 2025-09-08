@@ -3,12 +3,11 @@
 
 bool	PhoneBook::is_empty()
 {
-	if(contact[index].getFistName().empty()
+	if(contact[index].getFirstName().empty()
 	|| contact[index].getLastName().empty()
 	|| contact[index].getNickname().empty()
 	|| contact[index].getPhone().empty()
 	|| contact[index].getSecret().empty()){
-		system("clear");
 		std::cerr<<"Retry again!\n";
 		ADD();
 		return true;
@@ -62,13 +61,12 @@ void	write_range(std::string out){
 }
 
 void	PhoneBook::SEARCH(){
-	// system("clear");
 	std::cout<<"Index     |FirstName |LastName  |NickName  |Phone     |\n";
 	int	max, in;
 	if (flag) max = 8; else max = index;
 	for(int i = 0; i < max; i++){
 		std::cout << i + 1 << "         |";
-		write_range(contact[i].getFistName());
+		write_range(contact[i].getFirstName());
 		write_range(contact[i].getLastName());
 		write_range(contact[i].getNickname());
 		write_range(contact[i].getPhone());
@@ -82,11 +80,10 @@ void	PhoneBook::SEARCH(){
 		ss >> in;
 		in--;
 		if (in > 8 || in < 0 || ss.fail() || in > index){
-			system("clear");
 			std::cerr << "Invalid Index\n";
 			return ;
 		}
-		std::cout << "FirstName :" << contact[in].getFistName() << "\n";
+		std::cout << "FirstName :" << contact[in].getFirstName() << "\n";
 		std::cout << "LastName  :"  << contact[in].getLastName() << "\n";
 		std::cout << "NickName  :"  << contact[in].getNickname() << "\n";
 		std::cout << "Phone     :"  << contact[in].getPhone() << "\n";
@@ -96,7 +93,6 @@ void	PhoneBook::SEARCH(){
 
 void	check(PhoneBook *pb, std::string cmd){
 	if (cmd.empty()){
-		system("clear");
 		return ;
 	}
 	if (cmd.compare("ADD") == 0)
@@ -106,7 +102,6 @@ void	check(PhoneBook *pb, std::string cmd){
 	else if (cmd.compare("EXIT") == 0)
 		exit (0);
 	else{
-		system("clear");
 		std::cout<<"Command not found!\n";
 	}
 }
@@ -114,19 +109,16 @@ void	check(PhoneBook *pb, std::string cmd){
 PhoneBook::PhoneBook(){
 	flag = 0;
 	index = 0;
-	total = 0;
 }
 
-int main(int ac, char **av)
-{
+int main(int ac, char **av){
+	(void)av;
 	PhoneBook	pb;
 	if (ac != 1)
 		std::cout<<"Error\n";
-	system("clear");
 	std::cout<<"Type a command: {ADD, SEARCH, EXIT}\n>> ";
 	std::string out;
 	while(std::getline(std::cin, out)){
-		system("clear");
 		check(&pb, out);
 		std::cout<<"Type a command: {ADD, SEARCH, EXIT}\n>> ";
 	}

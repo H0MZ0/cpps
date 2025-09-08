@@ -12,7 +12,6 @@ class PhoneBook{
 	private:
 		Contacts contact[8];
 		int		index;
-		int		total;
 		int		flag;
 		
 	public:
