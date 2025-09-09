@@ -6,7 +6,7 @@
 # include <cstdlib>
 # include <sstream>
 
-class Contacts{
+class Contact{
 	private:
 		std::string first_name;
 		std::string last_name;

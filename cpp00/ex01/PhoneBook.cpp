@@ -1,5 +1,10 @@
 #include "PhoneBook.hpp"
-#include "Contacts.hpp"
+#include "Contact.hpp"
+
+PhoneBook::PhoneBook(){
+	flag = 0;
+	index = 0;
+}
 
 bool	PhoneBook::is_empty()
 {
@@ -44,7 +49,6 @@ void PhoneBook::ADD() {
     if (index == 8) flag = 1;
 }
 
-
 void	write_range(std::string out){
 	int	i = 0;
 	for (; i < 9 && out[i]; i++){
@@ -61,6 +65,8 @@ void	write_range(std::string out){
 }
 
 void	PhoneBook::SEARCH(){
+	if (index == 0){
+		std::cout << "No contacts yet" << std::endl; return ;}
 	std::cout<<"Index     |FirstName |LastName  |NickName  |Phone     |\n";
 	int	max, in;
 	if (flag) max = 8; else max = index;
@@ -79,7 +85,7 @@ void	PhoneBook::SEARCH(){
 		std::stringstream ss(out);
 		ss >> in;
 		in--;
-		if (in > 8 || in < 0 || ss.fail() || in > index){
+		if (in > 8 || in < 0 || ss.fail() || in >= max){
 			std::cerr << "Invalid Index\n";
 			return ;
 		}
@@ -104,11 +110,6 @@ void	check(PhoneBook *pb, std::string cmd){
 	else{
 		std::cout<<"Command not found!\n";
 	}
-}
-
-PhoneBook::PhoneBook(){
-	flag = 0;
-	index = 0;
 }
 
 int main(int ac, char **av){

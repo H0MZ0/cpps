@@ -1,5 +1,5 @@
 #include "PhoneBook.hpp"
-#include "Contacts.hpp"
+#include "Contact.hpp"
 
 /*SETTERS*/
 void    Contacts::setFirstName( std::string n){
