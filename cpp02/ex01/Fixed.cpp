@@ -1,7 +1,8 @@
 #include "Fixed.hpp"
+
 const int Fixed::bits = 8;
 
-Fixed::Fixed(){
+Fixed::Fixed(const float var2){
 	std::cout << "Default constructor called" << std::endl;
 	num = 0;
 }
@@ -28,4 +29,12 @@ int Fixed::getRawBits( void ) const{
 
 void Fixed::setRawBits( int const raw ){
 	num = raw;
+}
+
+float Fixed::toFloat( void ) const{
+	
+}
+
+int Fixed::toInt( void ) const{
+	
 }
