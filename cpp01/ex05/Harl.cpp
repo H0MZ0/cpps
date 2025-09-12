@@ -17,7 +17,6 @@ void Harl::error( void ){
 	std::cout << "\"ERROR\" level: " << "Dont't be like SAID" << std::endl;
 }
 
-
 void Harl::complain( std::string level ){
 	std::string help[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	void (Harl::*ptr[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
@@ -29,4 +28,3 @@ void Harl::complain( std::string level ){
 	}
 	std::cout << "[ Invalid Case ]\n";
 }
-

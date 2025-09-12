@@ -7,4 +7,5 @@ int main(int ac, char **av){
 	}
 	Harl a;
 	a.complain(av[1]);
+	return 0;
 }

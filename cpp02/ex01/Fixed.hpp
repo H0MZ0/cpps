@@ -2,22 +2,23 @@
 #define FIXED_HPP
 #include <iostream>
 
-class Fixed{
+class Fixed {
 private:
-	int num;
-	static const int bits;
+    int num;
+    static const int bits = 8;
 
 public:
-	Fixed(const int var1, const float var2); //Constructor
-	Fixed (const Fixed &obj); //Copy constructor
-	Fixed& operator=(const Fixed& other); //Copy assignment operator
-	~Fixed(); //Destructor
-	int getRawBits( void ) const;
-	void setRawBits( int const raw );
-	float toFloat( void ) const;
-	int toInt( void ) const;
-
+    Fixed();
+    Fixed(const int var1);
+    Fixed(const float var2);
+    Fixed(const Fixed &obj);
+    Fixed& operator=(const Fixed& other);
+    ~Fixed();
+    int getRawBits(void) const;
+    void setRawBits(int const raw);
+    float toFloat(void) const;
+    int toInt(void) const;
+    friend std::ostream& operator<<(std::ostream &out, const Fixed &obj);
 };
-
 
 #endif

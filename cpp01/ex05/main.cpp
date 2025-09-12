@@ -5,9 +5,5 @@ int main(int ac, char **av){
 		return 1;
 	Harl a;
 	a.complain(av[1]);
-	// a.complain("DEBUG");
-	// a.complain("INFO");
-	// a.complain("WARNING");
-	// a.complain("ERROR");
-	// a.complain("hola");
+	return 0;
 }

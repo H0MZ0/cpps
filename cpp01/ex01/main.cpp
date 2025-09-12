@@ -9,7 +9,8 @@ int main(){
     ptr[1].announce();
     ptr[2].setName("Aymane");
     ptr[2].announce();
-    // for (int i = 1; i <= 3; i++)
-    //     std::cout << "Zombie["<< i << "] = " << ptr[i - 1].getName() << std::endl;
+    for (int i = 1; i <= 3; i++)
+        std::cout << "Zombie["<< i << "] = " << ptr[i - 1].getName() << std::endl;
     delete[] ptr;
+	return 0;
 }

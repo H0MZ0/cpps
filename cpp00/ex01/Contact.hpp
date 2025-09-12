@@ -1,10 +1,11 @@
-#ifndef CONTACTS_HPP
-# define CONTACTS_HPP
+#ifndef Contact_HPP
+# define Contact_HPP
 
 # include <iostream>
 # include <cstring>
 # include <cstdlib>
 # include <sstream>
+# include <iomanip>
 
 class Contact{
 	private:

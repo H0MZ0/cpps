@@ -48,38 +48,29 @@ void PhoneBook::ADD() {
     index++;
     if (index == 8) flag = 1;
 }
-
 void	write_range(std::string out){
-	int	i = 0;
-	for (; i < 9 && out[i]; i++){
-		std::cout << out[i];
-	}
-	if (i == 9)
-		std::cout << ".";
+	if (out.length() > 10)
+		std::cout << out.substr(0, 9) << ".|";
 	else
-	{
-		for (; i < 10; i++)
-			std::cout << " ";
-	}
-	std::cout << "|";
+		std::cout << std::setw(10) << out << "|";
 }
 
 void	PhoneBook::SEARCH(){
 	if (index == 0){
-		std::cout << "No contacts yet" << std::endl; return ;}
-	std::cout<<"Index     |FirstName |LastName  |NickName  |Phone     |\n";
+		std::cout << "No Contact yet" << std::endl; return ;}
+	std::cout<<"     Index| FirstName|  LastName|  NickName|\n";
 	int	max, in;
 	if (flag) max = 8; else max = index;
 	for(int i = 0; i < max; i++){
-		std::cout << i + 1 << "         |";
+		std::cout << "         " << i + 1 << "|";
 		write_range(contact[i].getFirstName());
 		write_range(contact[i].getLastName());
 		write_range(contact[i].getNickname());
-		write_range(contact[i].getPhone());
+		// write_range(contact[i].getPhone());
 		std::cout<< "\n";
 	}
 	std::string out;
-	std::cout << ">> ";
+	std::cout << "Index ->";
 	getline(std::cin, out);
 	if (!out.empty()){
 		std::stringstream ss(out);
@@ -108,15 +99,12 @@ void	check(PhoneBook *pb, std::string cmd){
 	else if (cmd.compare("EXIT") == 0)
 		exit (0);
 	else{
-		std::cout<<"Command not found!\n";
+		return;
 	}
 }
 
-int main(int ac, char **av){
-	(void)av;
+int main(){
 	PhoneBook	pb;
-	if (ac != 1)
-		std::cout<<"Error\n";
 	std::cout<<"Type a command: {ADD, SEARCH, EXIT}\n>> ";
 	std::string out;
 	while(std::getline(std::cin, out)){

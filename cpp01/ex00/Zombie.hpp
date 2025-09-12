@@ -5,15 +5,15 @@
 class Zombie{
 
 	private:
-	std::string	name;
+		std::string	name;
 	
 	public:
-	Zombie();
-	~Zombie();
-	void announce( void );
-	void setName(std::string n);
-	void randomChump( std::string name );
-	Zombie* newZombie(std::string name);
+		Zombie();
+		~Zombie();
+		void announce( void );
+		void setName(std::string n);
+		void randomChump( std::string name );
+		Zombie* newZombie(std::string name);
 
 };
 

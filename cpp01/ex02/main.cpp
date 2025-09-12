@@ -10,4 +10,5 @@ int main(){
     std::cout << &holded << std::endl;
     std::cout << stringPTR << std::endl;
     std::cout << &stringREF << std::endl;
+	return 0;
 }
