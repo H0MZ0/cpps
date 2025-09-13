@@ -10,7 +10,6 @@ void Harl::info( void ){
 
 void Harl::warning( void ){
 	std::cout << "\"WARNING\" level: " << "Are you stupid" << std::endl;
-
 }
 
 void Harl::error( void ){
