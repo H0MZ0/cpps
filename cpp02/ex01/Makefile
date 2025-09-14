@@ -1,5 +1,5 @@
-CXX = c++ -std=c++98
-CXXFLAGS = -Wall -Wextra -Werror
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = Fixed
 SRC = main.cpp Fixed.cpp
 OBJ = $(SRC:.cpp=.o)
@@ -18,4 +18,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-.PHONY: all clean fclean
+re: fclean all
+
+.SECONDARY:
