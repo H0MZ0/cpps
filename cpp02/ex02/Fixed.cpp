@@ -2,9 +2,8 @@
 
 const int Fixed::bits = 8;
 
-Fixed::Fixed(){
+Fixed::Fixed() : num(0){
 	std::cout << "Default constructor called"<< std::endl;
-	num = 0;
 }
 
 Fixed::Fixed(const int var1){

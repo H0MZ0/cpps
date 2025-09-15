@@ -52,7 +52,7 @@ Fixed Fixed::operator/(const Fixed& other) const{
 	return result;
 } 
 
-// increment/decrement
+// Increment/Decrement
 Fixed&	Fixed::operator++(){
 	num++;
 	return *this;
