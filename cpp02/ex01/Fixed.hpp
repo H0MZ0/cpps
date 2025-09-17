@@ -8,7 +8,7 @@ class Fixed {
 
 private:
 	int					num;
-	static const int	bits;
+	static const int	bits = 8;
 
 public:
 	Fixed(); //Contructor
@@ -21,9 +21,10 @@ public:
 	float	toFloat( void ) const;
 	int		toInt( void ) const;
 	// Operators
-	Fixed operator=(const Fixed &other); //assignment operator overloading
-	friend std::ostream& operator<<(std::ostream& os, const Fixed& obj);
+	Fixed& operator=(const Fixed &other); //assignment operator overloading
 
 };
+
+std::ostream& operator<<(std::ostream& os, const Fixed& obj);
 
 #endif

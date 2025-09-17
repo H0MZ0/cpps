@@ -1,7 +1,5 @@
 #include "Fixed.hpp"
 
-const int Fixed::bits = 8;
-
 Fixed::Fixed(){
 	std::cout << "Default constructor called"<< std::endl;
 	num = 0;
@@ -34,7 +32,7 @@ Fixed::~Fixed(){
 	std::cout << "Destructor called"<< std::endl;
 }
 
-Fixed Fixed::operator=(const Fixed &other){
+Fixed& Fixed::operator=(const Fixed &other){
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this == &other){
 		return *this;

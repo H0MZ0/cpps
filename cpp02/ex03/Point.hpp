@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <math.h>
-#include "../ex02/Fixed.hpp"
+#include "Fixed.hpp"
 
 
 class Point{
