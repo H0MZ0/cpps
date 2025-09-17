@@ -1,0 +1,126 @@
+Tests préliminaires
+Si un cas de triche est suspecté, la notation et l'évaluation prennent fin immédiatement. Pour le signaler, sélectionnez le flag "Cheat". Faites attention à l'utiliser avec calme, précaution et discernement.
+
+Prérequis
+
+Le code doit compiler avec c++ et les flags -Wall -Wextra -Werror
+Pour rappel, ce projet doit suivre le standard C++98. Par conséquent,
+des fonctions C++11 (ou autre standard) et les containers ne sont PAS
+attendus.
+
+Ne notez pas l'exercice si vous trouvez :
+
+Une fonction implémentée dans un fichier d'en-tête (sauf pour les fonctions templates).
+Un Makefile compilant sans les flags demandés et/ou avec autre chose que c++.
+Sélectionnez le flag "Fonction interdite" (Forbidden function) si
+vous rencontrez :
+
+L'utilisation d'une fonction "C" (*alloc, *printf, free).
+L'utilisation d'une fonction interdite dans le projet.
+L'utilisation de "using namespace <ns_name>" ou du mot-clé "friend".
+L'utilisation d'une bibliothèque externe, ou de fonctionnalités propres aux versions postérieures à C++98.
+Exercice 00 : Mon premier canon
+Cet exercice introduit la notion de classe canonique avec un exercice arithmétique simple : les nombres à point fixe.
+
+Makefile
+
+Il y a un Makefile qui compile en utilisant les flags appropriés.
+
+Accesseurs
+
+La classe Fixed (ou autre) doit avoir des accesseurs pour la valeur brute :
+
+int getRawBits( void ) const;
+void setRawBits( int const raw ); Ces membres sont-ils présents et fonctionnels ?
+Classe canonique
+
+Une classe canonique doit avoir au moins :
+
+Un constructeur par défaut
+Un destructeur
+Un constructeur par recopie
+Un opérateur d'affectation Ces élements sont-ils présents et fonctionnels ?
+Exercice 01 : Premiers pas vers une classe utile
+L'exercice précédent était un bon premier pas. Cependant, la classe était peu utile puisqu'elle ne permettait de représenter que la valeur 0.0
+
+Makefile
+
+Il y a un Makefile qui compile en utilisant les flags appropriés.
+
+Constructeur via flottant
+
+Peut-on construire une instance à partir d'un nombre flottant ?
+
+operateur <<
+
+Y a-t-il un opérateur << et est-il fonctionnel ?
+
+Point fixe vers entier
+
+La classe doit inclure une fonction membre "int toInt(void) const;"
+qui convertit un nombre à point fixe en int.
+Est-elle présente et fonctionnelle ?
+
+Point fixe vers float
+
+La classe doit inclure une fonction membre "float toFloat(void) const;"
+qui convertit un nombre à point fixe vers un float.
+Est-elle présente et fonctionnelle ?
+
+Construction avec un int
+
+Peut-on instancier la classe avec le constructeur prenant un int ?
+
+Exercice 02 : Maintenant, on peut parler
+Cet exercice ajoute les opérateurs de comparaison et arithmétiques à la classe.
+
+Makefile
+
+Il y a un Makefile qui compile en utilisant les flags appropriés.
+
+Opérateurs de comparaison
+
+Les 6 opérateurs de comparaison (>, <, >=, <=, == et !=) sont-ils présents et fonctionnels ?
+
+Opérateurs arithmétiques
+
+Les 4 opérateurs arithmétiques (+, -, * et /) sont-ils présents et fonctionnels ?
+(Si vous effectuez une division par 0, il est acceptable que le programme crash.)
+
+Autres opérateurs
+
+Les quatre opérateurs d'incrémentation et de décrémentation
+(pré-incrémentation et post-incrémentation, pré-décrémentation et
+post-décrémentation) sont-ils présents et fonctionnels ?
+
+Surcharge de fonctions membres statiques publiques
+
+Pour finir, vérifiez que les fonctions membres statiques min() et max()
+sont implémentées et fonctionnelles.
+
+Exercice 03 : BSP
+Cet exercice devrait vous faire réaliser à quel point il est facile de mettre en œuvre des des algorithmes complexes une fois que les bases fonctionnent comme prévu.
+
+Makefile
+
+Il y a un Makefile qui compile en utilisant les flags appropriés.
+
+Classe Point
+
+Il existe une classe Point qui possède deux attributs (x et y) de type
+Fixed const.
+Elle possède également un constructeur qui prend deux flottants et
+initialise x et y avec ces valeurs.
+
+Fonction bsp
+
+Il existe une fonction bsp() dont le prototype est
+"bool bsp( Point const a, Point const b, Point const c, Point const point)".
+La fonction renvoie True si le point est à l'intérieur du triangle décrit par
+les sommets a, b, et c. Sinon, elle renvoie False.
+
+Main et tests
+
+Il y a un main pour tester que la fonction bsp() fonctionne comme décrit
+ci-dessus. Exécutez plusieurs tests pour vous assurer que la valeur de
+retour est correcte.
