@@ -1,9 +1,12 @@
 #include "Fixed.hpp"
 
-// const int Fixed::bits = 8;
-
-Fixed::Fixed() : num(0){
+Fixed& Fixed::operator=(const Fixed &other){
+	if (this == &other)
+		return *this;
+	return *this;
 }
+
+Fixed::Fixed() : num(0) {}
 
 Fixed::Fixed(const int var1){
 	num = var1 << bits;

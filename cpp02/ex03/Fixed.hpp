@@ -14,7 +14,7 @@ private:
 public:
 
 	Fixed(); //Contrustor
-	// Fixed& operator=(const Fixed &other); //assignment operator overloading
+	Fixed& operator=(const Fixed &other); //assignment operator overloading
 	Fixed (const Fixed &other); //Copy constructor
 	~Fixed(); //Destructor
 
