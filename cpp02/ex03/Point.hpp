@@ -2,7 +2,6 @@
 #define POINT_HPP
 
 #include <iostream>
-#include <math.h>
 #include "Fixed.hpp"
 
 
@@ -18,11 +17,12 @@ public:
 	Point (const Point &other);
 
 	Point& 		operator=(const Point &other);
-	Fixed const	getX() const;
-	Fixed const	getY() const;
+	Fixed		getX() const;
+	Fixed		getY() const;
 	~Point();
+
 };
 
-bool			bsp( Point const a, Point const b, Point const c, Point const point);
+bool	bsp( Point const a, Point const b, Point const c, Point const point);
 
 #endif
