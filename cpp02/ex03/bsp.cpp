@@ -9,7 +9,8 @@ bool bsp( Point const a, Point const b, Point const c, Point const point){
 	Fixed d1 = sign(point, a, b);
 	Fixed d2 = sign(point, b, c);
 	Fixed d3 = sign(point, c, a);
-	if (d1 > 0 && d2 > 0 && d3 > 0)
+	if (((d1 > 0 && d2 > 0 && d3 > 0) || (d1 < 0 && d2 < 0 && d3 < 0)) &&
+		d1 != 0 && d2 != 0 && d3 != 0)
 		return true;
 	return false;
 }
