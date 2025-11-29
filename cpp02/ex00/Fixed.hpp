@@ -10,12 +10,12 @@ private:
 	static const int	bits = 8;
 
 public:
-	Fixed(); //Contrustor
-	Fixed (const Fixed &other); //Copy constructor
-	Fixed& operator=(const Fixed &other); //assignment operator overloading
-	~Fixed(); //Destructor
-	int		getRawBits( void ) const; //Getter
-	void	setRawBits( int const raw ); //Setter
+	Fixed();                               	//Constructor
+	Fixed (const Fixed &other);            	//Copy constructor
+	Fixed& operator=(const Fixed &other);  	//assignment operator overloading
+	~Fixed();                              	//Destructor
+	int		getRawBits( void ) const;       //Getter
+	void	setRawBits( int const raw );    //Setter
 
 };
 

@@ -48,6 +48,7 @@ void PhoneBook::ADD() {
     index++;
     if (index == 8) flag = 1;
 }
+
 void	write_range(std::string out){
 	if (out.length() > 10)
 		std::cout << out.substr(0, 9) << ".|";
@@ -66,7 +67,6 @@ void	PhoneBook::SEARCH(){
 		write_range(contact[i].getFirstName());
 		write_range(contact[i].getLastName());
 		write_range(contact[i].getNickname());
-		// write_range(contact[i].getPhone());
 		std::cout<< "\n";
 	}
 	std::string out;

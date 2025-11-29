@@ -1,8 +1,7 @@
 #include "Fixed.hpp"
 
 Fixed& Fixed::operator=(const Fixed &other){
-	if (this == &other)
-		return *this;
+	(void)other;
 	return *this;
 }
 

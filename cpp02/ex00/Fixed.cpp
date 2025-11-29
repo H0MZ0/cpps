@@ -20,10 +20,7 @@ Fixed::~Fixed(){
 
 Fixed& Fixed::operator=(const Fixed &other){
 	std::cout << "Copy assignment operator called" << std::endl;
-	if (this == &other){
-		return *this;
-	}
-	num = other.num;
+	if (this != &other) {num = other.num;}
 	return *this;
 }
 

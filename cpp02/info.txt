@@ -1,0 +1,124 @@
+Inheritance in C++ is a fundamental concept of Object-Oriented Programming (OOP) that allows a new class, called the derived class (or child class), to acquire the properties (member variables) and behaviors (member functions) of an existing class, known as the base class (or parent class). 
+
+like when we have a 2 classes names is bmw and mersidis 
+they have the seem attribute and methode in both of them so we can make a parent class names is car and have the relaited attribute and methodes and make the 2 classes Inherite from this parent class
+
+//what is polymorphism in cpp ?
+Polymorphism in C++ is a core concept of object-oriented programming that means "many forms." It allows objects of different classes to be treated as objects of a common type, enabling a single interface to represent various underlying forms or behaviors. This flexibility allows for more adaptable and reusable code. 
+
+. This type of polymorphism is achieved by function overloading or operator overloading.
+//overloading :
+make two methode int the same class like add but they do a littel different between it 
+like do two fun add() the first do add(int a , int b) and the other add(float a , float b);
+
+//ov
+db bach nfhmo fixed point
+hia tari9a bach nkhzno a3dad li machi shiha bhal float o double b tari9a hssen 
+achno tandiro tankhseso wahd lblasa l joz2 sahih o blasa l joz2 l3achari 
+bhal haka 
+[ integer bits ][ fractional bits ]
+o bach nhwlo mn int l fixed point = int * 2 ose 8
+mital 10 hia 256 * 10 = 2560;
+o bach nrdoh int tan9smo 3la 256;
+
+n3tiw mital btafsil
+db 3ndna 3.141 bina nmtloha 3la asas fixed point 
+hanchdo 3.141 * 256 li hia 2 ^ 8 = 804.096
+hadi ka int(804.096) = 804 
+804 in binary hia f 16 bits 
+0000001100100100
+o ila chdia hada o 9smnah 3la joj drna 8 lwlin dyal l3adad sahih o tani dyal l3ada li mora lfasila 
+hayjina 3la had chkl 
+00000011 li hia 2 + 1 = 3
+00100100 li hia 1/8 + 1/64 = 0.1406 =~ 0.141 
+li howa f lkher 3.141 
+
+
+ϵ = أصغر خطوة ممكنة يتحرك بيها الرقم ديالك فـ fixed-point.
+عدد الـ bits fractional = اللي كيتحكم فـ القيمة ديال ϵ.
+mnin tandiro a++ w 3ndna fractoriel howa 8 y3ni bina nzido b 1/2^ 8 = (0.0039)
+Fixed a(1);   // = 1.0
+++a;          // كيزيد بϵ (0.0039) → a = 1.0039 تقريباً
+a--;          // كينقص بϵ → كيولي ≈ 1.0 من جديد
+ohna lfer9 li bin ++a o a++
+howa ano l9ima tatzad f a++ 3ad tankhdmo b a 
+o mnin tandiro ++a tankhdmo b a 3ad tatzad 
+
+
+نسخة non-const (Fixed&) → تستعمل إلا كنت باغي تستعمل النتائج وتغير فيها.
+
+نسخة const (const Fixed&) → تستعمل إلا كنت خدام مع متغيرات const.
+
+ila derna value blast reference fa taywliw 3ndna bzf t copy dyal dok object o hadchi taybt2 al 3amlia 
+lahoma nkhdmo b reff bach tkon 3amalia asra3
+
+
+covert dis to float
+
+12 is in binary 1100
+shift to the first 1 
+1100 will be 1.100 * 2^3 so we shift with 3
+we will 3 + 127 = 10 in binary is 10000010
+so in 32 bits
+the first bit for signe if - will be 1 and + will be 0
+0 && 10000010 && 100 && the less by 0 until complete 32 bits 
+
+        {signe && the( num shifted + 127) in binary && the nums after the shift && the complete by 0 }
+                                                32 bits
+
+
+3lach f copy opirator constructor tanrj3o reff 
+*رجعنا this → نقدر نكتب a = b = c = d …
+
+*ما رجعناش this → ما نقدرش ندير هاد السلسلة، خاصني ندير كل وحدة فخط واحد.
+
+Temporary object = object بلا اسم → كيتخلق ويتهرس مباشرة → outputs زايدة
+
+Named object = object عندو اسم → كيبقا موجود حتى يسالي scope → outputs متوقعة فقط
+
+Memory: 2560
+Binary: 00001010 00000000
+Fractional bits = آخر 8 bits (00000000) → fraction
+Integer part = الجزء اللي على اليسار (00001010) → 10
+
+
+كياخد bits وكيحركهم لليمين
+
+كل shift right واحد = division بـ2 (integer division)
+
+🔹 مثال عملي:
+Number = 10856 (fixed-point value)
+
+Binary (16 bits تقريباً): 00101010 01011000
+
+Fractional bits = 8
+
+Shift right 8 bits: 10856 >> 8
+
+00101010 01011000 >> 8 = 00101010
+
+
+Decimal = 42 ✅
+
+Fraction part (01011000) كيتجاهل → فقط integer part باقياً
+
+1️⃣ شنو هو stream؟
+
+فـC++، stream هو مسار لتبادل البيانات بين البرنامج وشي حاجة خارجية (console، file، إلخ).
+
+تقدر تفكر فيه بحال أنبوب (pipe):
+
+كتبدا تحط البيانات فـطرف الأنبوب
+
+وكيخرجو من الطرف الآخر تلقائياً
+
+
+💡 الخلاصة بالدارجة
+
+stream = أنبوب لتبادل البيانات بين البرنامج وشي حاجة خارجية
+
+std::cout → stream للخروج (console)
+
+std::cin → stream للدخول (keyboard)
+
+operator<< و operator>> كيتعاملو مع stream باش يسهلوا الطباعة والقراءة

@@ -11,17 +11,17 @@ private:
 	static const int	bits = 8;
 
 public:
-	Fixed(); //Contructor
-	Fixed(const int var1); //Int Contructor 
-	Fixed(const float var2); //Float Contructor
-	Fixed (const Fixed &other); //Copy constructor
-	~Fixed(); //Destructor
-	int		getRawBits( void ) const; //Getter
+	Fixed();                             //Contructor
+	Fixed(const int var1);               //Int Contructor 
+	Fixed(const float var2);             //Float Contructor
+	Fixed (const Fixed &other);          //Copy constructor
+	~Fixed();                            //Destructor
+	int		getRawBits( void ) const;    //Getter
 	void	setRawBits( int const raw ); //Setter
 	float	toFloat( void ) const;
 	int		toInt( void ) const;
 	// Operators
-	Fixed& operator=(const Fixed &other); //assignment operator overloading
+	Fixed& operator=(const Fixed &other);//assignment operator overloading
 
 };
 
