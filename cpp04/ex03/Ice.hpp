@@ -1,12 +1,11 @@
 #pragma once
-
-#include <AMateria.hpp>
+#include "AMateria.hpp"
+#include "ICharacter.hpp"
 #include <iostream>
 
-class Ice : public AMateria{
-	private:
-	AMateria *Amateria;
+class AMateria;
 
+class Ice : public AMateria{
 	public:
 	Ice();
 	Ice& operator=(const Ice &other);

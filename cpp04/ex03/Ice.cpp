@@ -1,15 +1,19 @@
 #include "Ice.hpp"
+#include "AMateria.hpp"
 
 Ice::Ice() : AMateria("ice"){
 	std::cout << "Default Ice constructor called!" << std::endl;
 }
 
 Ice& Ice::operator=(const Ice &other){
-
+	std::cout << "Ice copy assignemet operator called" << std::endl;
+	if (this != &other)
+		this->type = other.type;
+	return *this;
 }
 
-Ice::Ice(const Ice &other){
-
+Ice::Ice(const Ice &other) : AMateria(other){
+	std::cout << "Ice copy constructor called" << std::endl;
 }
 
 Ice::~Ice(){

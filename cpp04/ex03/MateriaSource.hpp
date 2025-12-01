@@ -2,12 +2,12 @@
 
 #include <iostream>
 #include "AMateria.hpp"
+#include "IMateriaSource.hpp"
 
 
-class MateriaSource{
+class MateriaSource : public IMateriaSource{
 	private:
 	AMateria* amateria[4];
-	int count;
 
 	public:
 	MateriaSource();

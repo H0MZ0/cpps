@@ -1,7 +1,7 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
-NAME = Animal
-SRC = Animal.cpp  Cat.cpp  Dog.cpp  main.cpp
+NAME = Interface
+SRC = AMateria.cpp Character.cpp Cure.cpp Ice.cpp main.cpp MateriaSource.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)

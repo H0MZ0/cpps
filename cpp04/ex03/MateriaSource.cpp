@@ -9,8 +9,11 @@ MateriaSource::MateriaSource(){
 MateriaSource::MateriaSource(const MateriaSource &other){
 	std::cout << "MateriaSource copy constructor called" << std::endl;
 	for(int i = 0; i < 4; i++){
-		if (other.amateria[i])
-			amateria[i] = other.amateria[i]->clone();
+		this->amateria[i] = NULL;
+	}
+	for(int i = 0; i < 4; i++){
+		if (other.amateria[i] != NULL)
+			this->amateria[i] = other.amateria[i]->clone();
 	}
 }
 
@@ -18,7 +21,16 @@ MateriaSource& MateriaSource::operator=(const MateriaSource &other){
 	std::cout << "MateriaSource copy operator called" << std::endl;
 	if (this != &other){
 		for (int i = 0; i < 4; i++){
-			amateria[i] = other.amateria[i];
+			if (this->amateria[i] != NULL){
+				delete this->amateria[i];
+				this->amateria[i] = NULL;
+			}
+		}
+		for (int i = 0; i < 4; i++){
+			if (other.amateria[i] != NULL)
+				this->amateria[i] = other.amateria[i]->clone();
+			else
+				this->amateria[i] = NULL;
 		}
 	}
 	return *this;
@@ -30,7 +42,6 @@ MateriaSource::~MateriaSource(){
 		if(amateria[i])
 			delete amateria[i];
 	}
-	delete amateria;
 }
 
 
@@ -38,11 +49,12 @@ void MateriaSource::learnMateria(AMateria *m){
 	if (!m)
 		return;
 	for (int i = 0; i < 4; i++){
-		if (amateria[i] == NULL){
+		if (!amateria[i]){
 			amateria[i] = m;
-			break;
+			return;
 		}
 	}
+	delete m;
 }
 
 AMateria* MateriaSource::createMateria(std::string const & type){
