@@ -56,3 +56,14 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other){
         grade = other.grade;
     return *this;
 }
+
+void Bureaucrat::signForm(const Bureaucrat& obj){
+    Form::beSigned(obj);
+    if (Form::getIsSigned())
+        std::cout << obj.getName() << " signed " << Form::getName() << std::endl;
+    else if (Form::getIsSigned() == false)
+        std::cout << obj.getName() <<  " couldn’t sign " << Form::getName() << " because <reason>" << std::endl;
+    //////////////
+    else
+        std::cout << "Their is a problem in SignForm" << std::endl; 
+}

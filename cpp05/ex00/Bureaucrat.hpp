@@ -22,7 +22,14 @@ class Bureaucrat{
     Bureaucrat operator++(int);
     Bureaucrat operator--(int);
 
-    void ExceptionTypes();
+    class GradeTooHighException : public std::exception{
+
+    };
+
+    class GradeTooLowException : public std::exception{
+
+    };
+
 };
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat &obj);

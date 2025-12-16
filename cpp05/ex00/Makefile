@@ -1,7 +1,7 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
-NAME = bureaucrat
-SRC = Bureaucrat.cpp main.cpp
+NAME = Bureaucrat
+SRC = Bureaucrat.cpp main.cpp From.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)

@@ -1,6 +1,10 @@
 #pragma once
 
 #include <iostream>
+#include "Form.hpp"
+
+
+// class  Form;
 
 class Bureaucrat{
     private:
@@ -23,6 +27,7 @@ class Bureaucrat{
     Bureaucrat operator--(int);
 
     void ExceptionTypes();
+    void signForm(const Bureaucrat& other);
 };
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat &obj);
