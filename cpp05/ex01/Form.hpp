@@ -1,8 +1,9 @@
-#pragma once
+#ifndef FORM_HPP
+#define FORM_HPP
 
 #include <iostream>
 #include <exception>
-#include "Bureaucrat.hpp"
+
 class Bureaucrat;
 
 class Form {
@@ -14,7 +15,8 @@ class Form {
 
     public:
     Form();
-    Form(std::string name, int sign, int execute);
+    Form(const std::string& name, int sign, int execute);
+    Form(const Form& other);
     Form& operator=(const Form& other);
     ~Form();
 
@@ -24,9 +26,22 @@ class Form {
     bool getIsSigned() const ;
 
     void beSigned(const Bureaucrat& obj);
-    void GradeTooHighException();
-    void GradeTooLowException();
-    // void ExceptionTypes();
+    class GradeTooHighException : public std::exception{
+        public:
+        virtual const char* what() const throw(){
+            return "Form grade too high";
+        }
+    };
+
+    class GradeTooLowException : public std::exception{
+        public:
+        virtual const char* what() const throw(){
+            return "Form grade too low";
+        }
+    };
+
 };
 
 std::ostream &operator<<(std::ostream &os, const Form &obj);
+
+#endif
