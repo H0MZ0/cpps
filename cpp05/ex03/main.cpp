@@ -3,6 +3,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 int main() {
     std::cout << "=== Test 1: ShrubberyCreationForm ===" << std::endl;
@@ -150,6 +151,43 @@ int main() {
         vip.executeForm(s);
         vip.executeForm(r);
         vip.executeForm(p);
+    } catch (std::exception &e) {
+        std::cout << "Exception: " << e.what() << std::endl;
+    }
+    std::cout << std::endl;
+
+    std::cout << "=== Test 12: Intern creates forms ===" << std::endl;
+    try {
+        Intern intern;
+        Bureaucrat boss("Boss", 1);
+        
+        AForm* form1 = intern.makeForm("shrubbery creation", "garden");
+        AForm* form2 = intern.makeForm("robotomy request", "Bender");
+        AForm* form3 = intern.makeForm("presidential pardon", "Arthur");
+        
+        if (form1) {
+            boss.signForm(*form1);
+            boss.executeForm(*form1);
+            delete form1;
+        }
+        
+        if (form2) {
+            boss.signForm(*form2);
+            boss.executeForm(*form2);
+            delete form2;
+        }
+        
+        if (form3) {
+            boss.signForm(*form3);
+            boss.executeForm(*form3);
+            delete form3;
+        }
+        
+        // Test invalid form name
+        AForm* invalid = intern.makeForm("unknown form", "target");
+        if (invalid)
+            delete invalid;
+            
     } catch (std::exception &e) {
         std::cout << "Exception: " << e.what() << std::endl;
     }
