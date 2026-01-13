@@ -1,45 +1,35 @@
 #include "ScalarConverter.hpp"
-#include <cstdlib>
-#include <string>
-#include <iostream>
 
-
-bool isPseudo(const std::string &s)
+// Type detection helpers
+static bool isChar(const std::string &s)
 {
-    return (s == "nan" || s == "nanf" ||
-            s == "+inf" || s == "-inf" ||
-            s == "+inff" || s == "-inff");
+    return (s.length() == 1 && std::isprint(s[0]) && !std::isdigit(s[0]));
 }
 
-bool isChar(const std::string &s)
+static bool isInt(const std::string &s)
 {
-    return (s.length() == 1 && !std::isdigit(s[0]));
-}
-
-bool isInt(const std::string &s)
-{
-    int i = 0;
+    size_t i = 0;
     if (s[i] == '+' || s[i] == '-')
         i++;
-    if (i >= (int)s.length())
+    if (i >= s.length())
         return false;
-    for (; i < (int)s.length(); i++)
+    for (; i < s.length(); i++)
         if (!std::isdigit(s[i]))
             return false;
     return true;
 }
 
-bool isDouble(const std::string &s)
+static bool isDouble(const std::string &s)
 {
-    int i = 0;
+    size_t i = 0;
     bool hasDot = false;
 
     if (s[i] == '+' || s[i] == '-')
         i++;
-    if (i >= (int)s.length())
+    if (i >= s.length())
         return false;
 
-    for (; i < (int)s.length(); i++)
+    for (; i < s.length(); i++)
     {
         if (s[i] == '.')
         {
@@ -53,60 +43,148 @@ bool isDouble(const std::string &s)
     return hasDot;
 }
 
-bool isFloat(const std::string &s)
+static bool isFloat(const std::string &s)
 {
     if (s.length() < 2 || s[s.length() - 1] != 'f')
         return false;
     std::string noF = s.substr(0, s.length() - 1);
-    return isDouble(noF);
+    return isDouble(noF) || isInt(noF);
 }
 
-void ScalarConverter::print_types(std::string const & v, int type){
-    if (type == 0){
-        std::cout << "ma3art" ;
-    }
-    if (type == 1){
-        std::cout << "char: " << v << std::endl;
-        std::cout << "int: " << static_cast<int>(v[0]) << std::endl;
-        std::cout << "float: " << static_cast<float>(v[0]) << std::endl;
-        std::cout << "double: " << static_cast<double>(v[0]) << std::endl;
-    }
-    if (type == 2){
-        std::cout << "char: " << "Non displayable" << std::endl;
-        std::cout << "int: " << atoi(v.c_str()) << std::endl;
-        std::cout << "float: " << (float)atoi(v.c_str()) << std::endl;
-        std::cout << "double: " << (double)atoi(v.c_str()) << std::endl;
-    }
-    if (type == 3 || type == 4){
-        std::cout << "char: Non displayable" << std::endl;
-        std::cout << "int: " << atoi(v.c_str()) << std::endl;
-
-        std::string tmp = v;
-        if (type == 3)
-            tmp = v.substr(0, v.length() - 1);
-
-        double d = std::atof(tmp.c_str());
-
-        std::cout << "float: " << static_cast<float>(d) << std::endl;
-        std::cout << "double: " << d << std::endl;
-    }
-
-}
-
-void ScalarConverter::convert(std::string const & v){
-    int type;
-    if (isPseudo(v))
-        type = 0;
-    else if (isChar(v))
-        type = 1;
-    else if (isInt(v))
-        type = 2;
-    else if (isFloat(v))
-        type = 3;
-    else if (isDouble(v))
-        type = 4;
-    else
-        type = 9;
-    print_types(v, type);
+// Conversion to double (main parsing function)
+static double parseToDouble(const std::string &s, bool &error)
+{
+    error = false;
     
+    if (s == "nan" || s == "nanf")
+        return std::numeric_limits<double>::quiet_NaN();
+    if (s == "+inf" || s == "+inff")
+        return std::numeric_limits<double>::infinity();
+    if (s == "-inf" || s == "-inff")
+        return -std::numeric_limits<double>::infinity();
+    
+    if (isChar(s))
+        return static_cast<double>(s[0]);
+    
+    std::string toParse = s;
+    if (isFloat(s))
+        toParse = s.substr(0, s.length() - 1);
+    
+    char *endptr;
+    errno = 0;
+    double result = std::strtod(toParse.c_str(), &endptr);
+    
+    if (*endptr != '\0' || errno == ERANGE)
+        error = true;
+    
+    return result;
+}
+
+// Print char conversion
+static void printChar(double value)
+{
+    if (std::isnan(value) || std::isinf(value))
+    {
+        std::cout << "char: impossible" << std::endl;
+        return;
+    }
+    
+    if (value < std::numeric_limits<char>::min() || 
+        value > std::numeric_limits<char>::max())
+    {
+        std::cout << "char: impossible" << std::endl;
+        return;
+    }
+    
+    char c = static_cast<char>(value);
+    if (!std::isprint(static_cast<unsigned char>(c)))
+    {
+        std::cout << "char: Non displayable" << std::endl;
+        return;
+    }
+    
+    std::cout << "char: '" << c << "'" << std::endl;
+}
+
+// Print int conversion
+static void printInt(double value)
+{
+    if (std::isnan(value) || std::isinf(value))
+    {
+        std::cout << "int: impossible" << std::endl;
+        return;
+    }
+    
+    if (value < std::numeric_limits<int>::min() || 
+        value > std::numeric_limits<int>::max())
+    {
+        std::cout << "int: impossible" << std::endl;
+        return;
+    }
+    
+    std::cout << "int: " << static_cast<int>(value) << std::endl;
+}
+
+// Print float conversion
+static void printFloat(double value)
+{
+    float f = static_cast<float>(value);
+    
+    if (std::isnan(f))
+    {
+        std::cout << "float: nanf" << std::endl;
+        return;
+    }
+    
+    if (std::isinf(f))
+    {
+        if (f > 0)
+            std::cout << "float: +inff" << std::endl;
+        else
+            std::cout << "float: -inff" << std::endl;
+        return;
+    }
+    
+    std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+}
+
+// Print double conversion
+static void printDouble(double value)
+{
+    if (std::isnan(value))
+    {
+        std::cout << "double: nan" << std::endl;
+        return;
+    }
+    
+    if (std::isinf(value))
+    {
+        if (value > 0)
+            std::cout << "double: +inf" << std::endl;
+        else
+            std::cout << "double: -inf" << std::endl;
+        return;
+    }
+    
+    std::cout << "double: " << std::fixed << std::setprecision(1) << value << std::endl;
+}
+
+void ScalarConverter::convert(std::string const & s)
+{
+    bool error = false;
+    double value = parseToDouble(s, error);
+    
+    if (error)
+    {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: impossible" << std::endl;
+        std::cout << "double: impossible" << std::endl;
+        return;
+    }
+    
+    printChar(value);
+    printInt(value);
+    printFloat(value);
+    printDouble(value);
 }

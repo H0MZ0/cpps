@@ -1,7 +1,7 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = convert
-SRC = ScalarConverter.cpp main.cpp
+NAME = Base
+SRC = Base.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)

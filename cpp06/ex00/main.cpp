@@ -2,7 +2,7 @@
 
 int main(int ac, char **av){
     if (ac != 2){
-        std::cerr << "no valid inp" << std::endl;
+        std::cerr << "Usage: ./convert <value>" << std::endl;
         return 1;
     }
     (void)ac;
