@@ -54,7 +54,7 @@ const char* AForm::FormNotSignedException::what() const throw() {
     return "Form is not signed!";
 }
 
-void AForm::execute(Bureaucrat const & executor){
+void AForm::execute(Bureaucrat const & executor) const {
     if (!isSigned)
         throw FormNotSignedException();
     if (executor.getGrade() > executeGrade)
