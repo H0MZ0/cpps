@@ -12,7 +12,7 @@ struct Data {
 
 class Serializer {
     private:
-        Serializer();  // Non-instantiable
+        Serializer();
         Serializer(Serializer const & src);
         Serializer & operator=(Serializer const & src);
         ~Serializer();

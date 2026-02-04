@@ -1,12 +1,22 @@
 #include "ScalarConverter.hpp"
 
-// Type detection helpers
-static bool isChar(const std::string &s)
+ScalarConverter::ScalarConverter() {}
+ScalarConverter::ScalarConverter(ScalarConverter const & src) {(void)src;}
+ScalarConverter & ScalarConverter::operator=(ScalarConverter const & src) {(void)src; return *this;}
+ScalarConverter::~ScalarConverter() {}
+
+
+
+
+
+
+
+bool isChar(const std::string &s)
 {
     return (s.length() == 1 && std::isprint(s[0]) && !std::isdigit(s[0]));
 }
 
-static bool isInt(const std::string &s)
+bool isInt(const std::string &s)
 {
     size_t i = 0;
     if (s[i] == '+' || s[i] == '-')
@@ -19,7 +29,7 @@ static bool isInt(const std::string &s)
     return true;
 }
 
-static bool isDouble(const std::string &s)
+bool isDouble(const std::string &s)
 {
     size_t i = 0;
     bool hasDot = false;
@@ -43,7 +53,7 @@ static bool isDouble(const std::string &s)
     return hasDot;
 }
 
-static bool isFloat(const std::string &s)
+bool isFloat(const std::string &s)
 {
     if (s.length() < 2 || s[s.length() - 1] != 'f')
         return false;
@@ -52,7 +62,7 @@ static bool isFloat(const std::string &s)
 }
 
 // Conversion to double (main parsing function)
-static double parseToDouble(const std::string &s, bool &error)
+double parseToDouble(const std::string &s, bool &error)
 {
     error = false;
     
@@ -81,7 +91,7 @@ static double parseToDouble(const std::string &s, bool &error)
 }
 
 // Print char conversion
-static void printChar(double value)
+void printChar(double value)
 {
     if (std::isnan(value) || std::isinf(value))
     {
@@ -107,7 +117,7 @@ static void printChar(double value)
 }
 
 // Print int conversion
-static void printInt(double value)
+void printInt(double value)
 {
     if (std::isnan(value) || std::isinf(value))
     {
@@ -123,10 +133,10 @@ static void printInt(double value)
     }
     
     std::cout << "int: " << static_cast<int>(value) << std::endl;
-}
+}  
 
 // Print float conversion
-static void printFloat(double value)
+void printFloat(double value)
 {
     float f = static_cast<float>(value);
     
@@ -149,7 +159,7 @@ static void printFloat(double value)
 }
 
 // Print double conversion
-static void printDouble(double value)
+void printDouble(double value)
 {
     if (std::isnan(value))
     {
