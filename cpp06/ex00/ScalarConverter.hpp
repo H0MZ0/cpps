@@ -21,7 +21,7 @@ class ScalarConverter{
     public:
         static void convert(std::string const & value);
         
-};
+}; 
 
 void printDouble(double value);
 void printFloat(double value);
