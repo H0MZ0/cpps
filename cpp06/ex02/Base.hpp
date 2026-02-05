@@ -4,26 +4,16 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <exception>
 
 class Base{
     public:
         virtual ~Base();
 };
 
-class A : public Base {
-    public:
-        virtual ~A() {}
-};
-
-class B : public Base {
-    public:
-        virtual ~B() {}
-};
-
-class C : public Base {
-    public:
-        virtual ~C() {}
-};
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
 
 Base * generate(void);
 void identify(Base* p);

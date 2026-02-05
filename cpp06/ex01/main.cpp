@@ -10,11 +10,9 @@ int main() {
     uintptr_t raw = Serializer::serialize(ptr);
     Data* deserialized = Serializer::deserialize(raw);
     
-    // Check if pointers are equal
     if (ptr == deserialized)
         std::cout << "Success!" << std::endl;
     
-    // Check data integrity
     std::cout << "n: " << deserialized->n << std::endl;
     std::cout << "s: " << deserialized->s << std::endl;
     
