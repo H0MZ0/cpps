@@ -5,12 +5,15 @@ void ScalarConverter::convert(const std::string &literal)
     double val;
 
     if (literal == "nan" || literal == "nanf")
-        val = std::numeric_limits<double>::quiet_NaN();
+        val = NAN;
     else if (literal == "inf" || literal == "+inf" ||
              literal == "inff" || literal == "+inff")
-        val = std::numeric_limits<double>::infinity();
+        val = INFINITY;
     else if (literal == "-inf" || literal == "-inff")
-        val = -std::numeric_limits<double>::infinity();
+        val = -INFINITY;
+
+    else if (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'' )
+        val = static_cast<double>(literal[1]);
 
     else if (literal.length() == 1 &&
              std::isprint(literal[0]) &&
