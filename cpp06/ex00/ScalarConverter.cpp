@@ -12,7 +12,10 @@ void ScalarConverter::convert(const std::string &literal)
     else if (literal == "-inf" || literal == "-inff")
         val = -INFINITY;
 
-    else if (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'' )
+    else if (literal.length() == 3 &&
+             literal[0] == '\'' &&
+             literal[2] == '\'' &&
+             std::isprint(literal[1])){
         val = static_cast<double>(literal[1]);
 
     else if (literal.length() == 1 &&
