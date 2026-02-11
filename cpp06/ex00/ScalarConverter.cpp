@@ -5,23 +5,26 @@ void ScalarConverter::convert(const std::string &literal)
     double val;
 
     if (literal == "nan" || literal == "nanf")
-        val = NAN;
+        val = 0.0 / 0.0;
+
     else if (literal == "inf" || literal == "+inf" ||
              literal == "inff" || literal == "+inff")
         val = INFINITY;
     else if (literal == "-inf" || literal == "-inff")
         val = -INFINITY;
 
+    else if (literal.length() == 1 &&
+             std::isprint(literal[0]) &&
+             !std::isdigit(literal[0]))
+        val = static_cast<double>(literal[0]);
+
     else if (literal.length() == 3 &&
              literal[0] == '\'' &&
              literal[2] == '\'' &&
              std::isprint(literal[1])){
         val = static_cast<double>(literal[1]);
+    }
 
-    else if (literal.length() == 1 &&
-             std::isprint(literal[0]) &&
-             !std::isdigit(literal[0]))
-        val = static_cast<double>(literal[0]);
 
     else
     {
@@ -49,8 +52,8 @@ void ScalarConverter::convert(const std::string &literal)
 
     std::cout << "int: ";
     if (std::isnan(val) || std::isinf(val) ||
-        val < std::numeric_limits<int>::min() ||
-        val > std::numeric_limits<int>::max())
+        val < INT_MIN ||
+        val > INT_MAX)
         std::cout << "impossible";
     else
         std::cout << static_cast<int>(val);
