@@ -1,25 +1,11 @@
 #include "ScalarConverter.hpp"
 
-ScalarConverter::ScalarConverter() {}
-
-ScalarConverter::ScalarConverter(ScalarConverter const & src) {
-    (void)src;
-}
-
-ScalarConverter & ScalarConverter::operator=(ScalarConverter const & src) {
-    (void)src;
-    return *this;
-}
-
-ScalarConverter::~ScalarConverter() {}
-
-
 void ScalarConverter::convert(const std::string &literal)
 {
     double val;
 
     if (literal == "nan" || literal == "nanf")
-        val = NAN;
+        val = 0.0 / 0.0;
 
     else if (literal == "inf" || literal == "+inf" ||
              literal == "inff" || literal == "+inff")

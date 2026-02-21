@@ -1,23 +1,23 @@
 #ifndef WHATEVER_HPP
 #define WHATEVER_HPP
 
-#include <iostream>
+# include <iostream>
 
 template <typename T>
-void swap(T &a, T &b){
-    T c = a;
-    a = b;
-    b = c;
+void swap(T &v1, T &v2){
+    T swap = v1;
+    v1 = v2;
+    v2 = swap;
 }
 
 template <typename T>
-T min(T a, T b){
-    return (a < b) ? a : b;
+T min(T v1, T v2){
+    return (v1 < v2) ? v1 : v2;
 }
 
 template <typename T>
-T max(T a, T b){
-    return (a > b) ? a : b;
+T max(T v1, T v2){
+    return (v1 > v2) ? v1 : v2;
 }
 
 #endif

@@ -1,8 +1,8 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = whatever
-SRC = main.cpp
-HAD = iter.hpp
+NAME = Array
+SRC = main.cpp 
+HAD = Array.hpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)

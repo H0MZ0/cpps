@@ -1,8 +1,8 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = whatever
-SRC = main.cpp
-HAD = iter.hpp
+NAME = Span
+SRC = main.cpp Span.cpp 
+HAD = Span.hpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
@@ -19,6 +19,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: all fclean clean
-
+re: fclean all
+.PHONY: all clean fclean re
 .SECONDARY:
