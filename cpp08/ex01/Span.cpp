@@ -2,10 +2,7 @@
 
 Span::Span() : _N(0), _numbers() {}
 
-Span::Span(unsigned int N) : _N(N), _numbers() {
-    if (N == 0)
-        throw std::invalid_argument("N must be greater than 0");
-}
+Span::Span(unsigned int N) : _N(N), _numbers() {}
 
 Span::Span(const Span& other) : _N(other._N), _numbers(other._numbers) {}
 
@@ -25,7 +22,7 @@ void Span::addNumber(int number) {
     _numbers.push_back(number);
 }
 
-int Span::shortestSpan() const {
+unsigned int Span::shortestSpan() const {
     if (_numbers.size() < 2)
         throw std::logic_error("Not enough numbers to find a span");
 
@@ -43,19 +40,12 @@ int Span::shortestSpan() const {
     return minSpan;
 }
 
-int Span::longestSpan() const {
+unsigned int Span::longestSpan() const {
     if (_numbers.size() < 2)
         throw std::logic_error("Not enough numbers to find a span");
 
-    int min = _numbers[0];
-    int max = _numbers[0];
+    std::vector<int>::const_iterator mn = std::min_element(_numbers.begin(), _numbers.end());
+    std::vector<int>::const_iterator mx = std::max_element(_numbers.begin(), _numbers.end());
 
-    for (size_t i = 1; i < _numbers.size(); i++) {
-        if (_numbers[i] < min)
-            min = _numbers[i];
-        if (_numbers[i] > max)
-            max = _numbers[i];
-    }
-
-    return max - min;
+    return static_cast<unsigned int>(*mx - *mn);
 }
