@@ -16,7 +16,7 @@ int main()
         std::cout << e.what() << std::endl;
     }
 
-    std::cout << "Big Vector test:" << std::endl;
+    std::cout << std::endl << "Big Vector test:" << std::endl;
     try {
         std::vector<int> v;
         for (int i = 0; i < 10000; ++i)
@@ -29,7 +29,7 @@ int main()
         std::cout << e.what() << std::endl;
     }
 
-    std::cout << "Empty span exception test:" << std::endl;
+    std::cout << std::endl << "Empty span exception test:" << std::endl;
     try {
         Span empty(5);
         std::cout << empty.shortestSpan() << std::endl;
@@ -37,7 +37,7 @@ int main()
         std::cout << "Expected error: " << e.what() << std::endl;
     }
 
-    std::cout << "Single element exception test:" << std::endl;
+    std::cout << std::endl << "Single element exception test:" << std::endl;
     try {
         Span one(5);
         one.addNumber(42);
@@ -46,7 +46,7 @@ int main()
         std::cout << "Expected error: " << e.what() << std::endl;
     }
 
-    std::cout << "Single add overflow test:" << std::endl;
+    std::cout << std::endl << "Single add overflow test:" << std::endl;
     try {
         Span small(1);
         small.addNumber(3);
@@ -55,7 +55,7 @@ int main()
         std::cout << "Expected overflow: " << e.what() << std::endl;
     }
 
-    std::cout << "Range overflow test:" << std::endl;
+    std::cout << std::endl << "Range overflow test:" << std::endl;
     try {
         std::vector<int> values;
         values.push_back(10);
@@ -68,7 +68,7 @@ int main()
         std::cout << "Expected overflow: " << e.what() << std::endl;
     }
 
-    std::cout << "Duplicate values test:" << std::endl;
+    std::cout << std::endl << "Duplicate values test:" << std::endl;
     try {
         Span dup(4);
         dup.addNumber(5);

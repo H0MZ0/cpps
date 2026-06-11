@@ -2,7 +2,12 @@
 
 Span::Span() : _N(0), _numbers() {}
 
-Span::Span(unsigned int N) : _N(N), _numbers() {}
+Span::Span(int N) : _numbers() {
+    if (N >= 0)
+        _N = static_cast<unsigned int>(N);
+    else
+        throw std::out_of_range("_N: should be Positive");
+}
 
 Span::Span(const Span& other) : _N(other._N), _numbers(other._numbers) {}
 
