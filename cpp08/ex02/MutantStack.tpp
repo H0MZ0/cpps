@@ -1,35 +1,58 @@
-template <typename T>
-MutantStack<T>::MutantStack() : std::stack<T>() {}
+template <class T, class container>
+MutantStack<T, container>::MutantStack() : std::stack<T, container>() {}
 
-template <typename T>
-MutantStack<T>::MutantStack(const MutantStack<T> &other) : std::stack<T>(other) {}
+template <class T, class container>
+MutantStack<T, container>::MutantStack(const MutantStack& obj){
+    *this = obj;
+}
 
-template <typename T>
-MutantStack<T> &MutantStack<T>::operator=(const MutantStack<T> &other) {
-    if (this != &other)
-        std::stack<T>::operator=(other);
+template <class T, class container>
+MutantStack<T, container>& MutantStack<T, container>::operator=(const MutantStack& obj)
+{
+    if (this != &obj)
+        this->c = obj.c;
     return *this;
 }
 
-template <typename T>
-MutantStack<T>::~MutantStack() {}
+template <class T, class container>
+MutantStack<T, container>::~MutantStack() {}
 
-template <typename T>
-typename MutantStack<T>::iterator MutantStack<T>::begin() {
+template <class T, class container>
+typename MutantStack<T, container>::iterator MutantStack<T, container>::begin(){
     return this->c.begin();
 }
 
-template <typename T>
-typename MutantStack<T>::iterator MutantStack<T>::end() {
+template <class T, class container>
+typename MutantStack<T, container>::iterator MutantStack<T, container>::end(){
     return this->c.end();
 }
 
-template <typename T>
-typename MutantStack<T>::const_iterator MutantStack<T>::begin() const {
+template <class T, class container>
+typename MutantStack<T, container>::const_iterator MutantStack<T, container>::begin() const{
     return this->c.begin();
 }
 
-template <typename T>
-typename MutantStack<T>::const_iterator MutantStack<T>::end() const {
+template <class T, class container>
+typename MutantStack<T, container>::const_iterator MutantStack<T, container>::end() const{
     return this->c.end();
+}
+
+template <class T, class container>
+typename MutantStack<T, container>::reverse_iterator MutantStack<T, container>::rbegin(){
+    return this->c.rbegin();
+}
+
+template <class T, class container>
+typename MutantStack<T, container>::reverse_iterator MutantStack<T, container>::rend(){
+    return this->c.rend();
+}
+
+template <class T, class container>
+typename MutantStack<T, container>::const_reverse_iterator MutantStack<T, container>::rbegin() const{
+    return this->c.rbegin();
+}
+
+template <class T, class container>
+typename MutantStack<T, container>::const_reverse_iterator MutantStack<T, container>::rend() const{
+    return this->c.rend();
 }
