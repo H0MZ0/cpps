@@ -5,7 +5,7 @@
 #include <stdexcept>
 
 template <typename T>
-void    easyfind(const T& con, int value);
+typename T::const_iterator easyfind(const T& con, int value);
 
 #include "easyfind.tpp"
 

@@ -14,16 +14,16 @@ int main()
 
     try {
         easyfind(v, 2); // found
-        std::cout << "Vector: value found" << std::endl;
+        std::cout << "Vector      : found" << std::endl;
     } catch (const std::exception& e) {
-        std::cout << "Vector: value not found" << std::endl;
+        std::cout << "Vector      : not found" << std::endl;
     }
 
     try {
         easyfind(v, 42); // not found
-        std::cout << "Vector: value found" << std::endl;
+        std::cout << "Vector      : found" << std::endl;
     } catch (const std::exception& e) {
-        std::cout << "Vector: value not found" << std::endl;
+        std::cout << "Vector      : not found" << std::endl;
     }
 
     // ===== LIST TEST =====
@@ -34,16 +34,16 @@ int main()
 
     try {
         easyfind(l, 20); // found
-        std::cout << "List: value found" << std::endl;
+        std::cout << "List        : found" << std::endl;
     } catch (const std::exception& e) {
-        std::cout << "List: value not found" << std::endl;
+        std::cout << "List        : not found" << std::endl;
     }
 
     try {
         easyfind(l, -1); // not found
-        std::cout << "List: value found" << std::endl;
+        std::cout << "List        : found" << std::endl;
     } catch (const std::exception& e) {
-        std::cout << "List: value not found" << std::endl;
+        std::cout << "List        : not found" << std::endl;
     }
 
     // ===== CONST CONTAINER TEST =====
@@ -51,9 +51,9 @@ int main()
 
     try {
         easyfind(cv, 1); // found
-        std::cout << "Const vector: value found" << std::endl;
+        std::cout << "Const vector: found" << std::endl;
     } catch (const std::exception& e) {
-        std::cout << "Const vector: value not found" << std::endl;
+        std::cout << "Const vector: not found" << std::endl;
     }
 
     return 0;

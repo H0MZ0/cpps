@@ -2,15 +2,13 @@ template <class T, class container>
 MutantStack<T, container>::MutantStack() : std::stack<T, container>() {}
 
 template <class T, class container>
-MutantStack<T, container>::MutantStack(const MutantStack& obj){
-    *this = obj;
-}
+MutantStack<T, container>::MutantStack(const MutantStack& obj) : std::stack<T, container>(obj) {}
 
 template <class T, class container>
 MutantStack<T, container>& MutantStack<T, container>::operator=(const MutantStack& obj)
 {
     if (this != &obj)
-        this->c = obj.c;
+        std::stack<T, container>::operator=(obj);
     return *this;
 }
 

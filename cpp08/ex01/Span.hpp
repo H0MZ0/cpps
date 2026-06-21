@@ -17,7 +17,7 @@ class Span
     public:
         Span(const Span& other);
         Span& operator=(const Span& other);
-        Span(int N);
+        Span(unsigned int N);
         ~Span();
         
         template <typename It>
