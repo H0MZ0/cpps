@@ -7,6 +7,7 @@ int main(int ac, char **av){
         return 1;
     }
 
-    parseFile(av[1]);
+    BitcoinExchange btc;
+    btc.parseFile(av[1]);
 
 }
