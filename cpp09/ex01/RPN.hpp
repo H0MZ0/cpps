@@ -21,6 +21,7 @@ public:
     ~RPN();
 
     void evaluate(const std::string &expr);
+    bool calculate(int a, int b, char op, int &result);
 };
 
 #endif

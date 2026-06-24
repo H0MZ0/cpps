@@ -16,23 +16,32 @@ bool RPN::isOperator(char c) {
     return (c == '+' || c == '-' || c == '*' || c == '/');
 }
 
-int RPN::calculate(int a, int b, char op) {
-    if (op == '+') return a + b;
-    if (op == '-') return a - b;
-    if (op == '*') return a * b;
-    if (op == '/') {
-        if (b == 0) {
-            std::cerr << "Error: division by zero" << std::endl;
-            exit(1);
-        }
-        return a / b;
+bool RPN::calculate(int a, int b, char op, int &result) {
+    long long res = 0;
+    
+    if (op == '+') res = (long long)a + b;
+    else if (op == '-') res = (long long)a - b;
+    else if (op == '*') res = (long long)a * b;
+    else if (op == '/') {
+        if (b == 0) return false;
+        res = (long long)a / b;
     }
-    return 0;
+    
+    if (res > 2147483647 || res < -2147483648)
+        return false;
+        
+    result = static_cast<int>(res);
+    return true;
 }
 
 void RPN::evaluate(const std::string &expr) {
     std::stringstream ss(expr);
     std::string token;
+
+    if (expr.find_first_not_of(" \t") == std::string::npos) {
+        std::cerr << "Error" << std::endl;
+        return;
+    }
 
     while (ss >> token) {
         if (token.length() != 1) {
@@ -53,7 +62,12 @@ void RPN::evaluate(const std::string &expr) {
             int b = _stack.top(); _stack.pop();
             int a = _stack.top(); _stack.pop();
             
-            _stack.push(calculate(a, b, c));
+            int result = 0;
+            if (!calculate(a, b, c, result)) {
+                std::cerr << "Error" << std::endl;
+                return;
+            }
+            _stack.push(result);
         } 
         else {
             std::cerr << "Error" << std::endl;

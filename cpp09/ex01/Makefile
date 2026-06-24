@@ -2,11 +2,12 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = RPN
 SRC = main.cpp RPN.cpp
+HAD = RPN.hpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(HAD)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 %.o: %.cpp
@@ -18,6 +19,7 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: all fclean clean
+re: fclean all
+.PHONY: all clean fclean re
 
 .SECONDARY:
