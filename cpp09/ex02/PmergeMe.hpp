@@ -21,6 +21,10 @@ public:
 
     bool parsing(int ac, char **args);
     void printBefore() const;
+
+    void sortVector();
+    void sortDeque();
+    void printAfter() const;
 };
 
 #endif
