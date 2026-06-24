@@ -6,15 +6,18 @@
 BitcoinExchange::BitcoinExchange() {
     loadDatabase();
 }
+
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) {
 	if (this != &other)
         this->_database = other._database;
 }
+
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other){
 	if (this != &other)
         this->_database = other._database;
 	return  *this;
 }
+
 BitcoinExchange::~BitcoinExchange() {}
 
 void BitcoinExchange::loadDatabase() {
@@ -36,54 +39,58 @@ void BitcoinExchange::loadDatabase() {
     }
     file.close();
 }
+
 void BitcoinExchange::parseFile(char *File) {
     std::ifstream file(File);
     if (!file.is_open()) {
-        std::cerr << "Error: can't open file " << File << std::endl;
+        std::cerr << "Error: could not open file." << std::endl;
         return;
     }
     std::string line;
     std::getline(file, line);
 
     while (std::getline(file, line)) {
-        if (line.empty()) continue; 
+        if (line.empty()) continue;
 
-        std::stringstream ss(line);
-        std::string date;
-        char pipe;
-        double value;
-
-        if (ss >> date >> pipe >> value) {
-            if (pipe != '|') {
-                std::cerr << "Error: bad input => " << line << std::endl;
-                continue;
-            }
-
-            std::string extra;
-            if (ss >> extra) {
-                std::cerr << "Error: bad input => " << line << std::endl;
-                continue;
-            }
-
-            if (!isValidDate(date)) {
-                std::cerr << "Error: bad input => " << date << std::endl;
-                continue;
-            } else if (!isValidValue(value)) {
-                continue;
-            } else {
-                std::map<std::string, double>::iterator it = _database.lower_bound(date);
-                if (it == _database.end() || it->first != date) {
-                    if (it == _database.begin()) {
-                        std::cerr << "Error: no valid date found before " << date << std::endl;
-                        continue;
-                    }
-                    --it;
-                }
-                std::cout << date << " => " << value << " = " << (value * it->second) << std::endl;
-            }
-        } else {
+        size_t pipe_pos = line.find('|');
+        if (pipe_pos == std::string::npos) {
             std::cerr << "Error: bad input => " << line << std::endl;
+            continue;
         }
+
+        std::string date_str = line.substr(0, pipe_pos);
+        std::string val_str = line.substr(pipe_pos + 1);
+
+        if (!date_str.empty() && date_str[date_str.length() - 1] == ' ')
+            date_str = date_str.substr(0, date_str.length() - 1);
+        if (!val_str.empty() && val_str[0] == ' ')
+            val_str = val_str.substr(1);
+
+        if (!isValidDate(date_str)) {
+            std::cerr << "Error: bad input => " << date_str << std::endl;
+            continue;
+        }
+
+        char* endptr;
+        double value = std::strtod(val_str.c_str(), &endptr);
+        if (*endptr != '\0' && !isspace(*endptr)) {
+            std::cerr << "Error: bad input => " << line << std::endl;
+            continue;
+        }
+
+        if (!isValidValue(value)) {
+            continue;
+        }
+
+        std::map<std::string, double>::iterator it = _database.lower_bound(date_str);
+        if (it == _database.end() || it->first != date_str) {
+            if (it == _database.begin()) {
+                std::cerr << "Error: no valid date found before " << date_str << std::endl;
+                continue;
+            }
+            --it;
+        }
+        std::cout << date_str << " => " << value << " = " << (value * it->second) << std::endl;
     }
     file.close();
 }
@@ -108,13 +115,19 @@ bool BitcoinExchange::isValidDate(const std::string &date) {
     char c1, c2;
     std::stringstream ss(date);
     
-    if (!(ss >> year >> c1 >> month >> c2 >> day) || c1 != '-' || c2 != '-') {
+    if (!(ss >> year >> c1 >> month >> c2 >> day) || c1 != '-' || c2 != '-')
         return false;
-	}
 
-    if (year < 2009 || month < 1 || month > 12 || day < 1 || day > 31){
+    if (year < 2009 || month < 1 || month > 12 || day < 1)
         return false;
-	}
-	
-	return true;
+
+    int daysInMonth[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    
+    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+        daysInMonth[1] = 29;
+
+    if (day > daysInMonth[month - 1])
+        return false;
+    
+    return true;
 }
