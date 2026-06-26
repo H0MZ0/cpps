@@ -1,6 +1,8 @@
 #include "BitcoinExchange.hpp"
 #include <cstdio>
 #include <fstream>
+#include <iterator>
+#include <stdexcept>
 #include <string>
 
 BitcoinExchange::BitcoinExchange() {
@@ -23,11 +25,14 @@ BitcoinExchange::~BitcoinExchange() {}
 void BitcoinExchange::loadDatabase() {
     std::ifstream file("data.csv");
     if (!file.is_open()) {
-        std::cerr << "Error: could not open database file." << std::endl;
-        return;
+        throw std::runtime_error("could not open database file.");
     }
+    
     std::string line;
-    std::getline(file, line);
+    if (!std::getline(file, line) || line.empty()) {
+        file.close();
+        throw std::runtime_error("database file is empty.");
+    }
 
     while (std::getline(file, line)) {
         std::stringstream ss(line);
@@ -38,14 +43,18 @@ void BitcoinExchange::loadDatabase() {
             _database[date] = std::strtod(rate_str.c_str(), NULL);
     }
     file.close();
+
+    if (_database.empty()) {
+        throw std::runtime_error("database has no valid content.");
+    }
 }
 
 void BitcoinExchange::parseFile(char *File) {
     std::ifstream file(File);
     if (!file.is_open()) {
-        std::cerr << "Error: could not open file." << std::endl;
-        return;
+        throw std::runtime_error("could not open input file.");
     }
+    
     std::string line;
     std::getline(file, line);
 

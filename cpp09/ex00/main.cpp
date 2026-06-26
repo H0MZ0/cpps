@@ -1,4 +1,5 @@
 #include "BitcoinExchange.hpp"
+#include <exception>
 
 
 int main(int ac, char **av){
@@ -7,7 +8,12 @@ int main(int ac, char **av){
         return 1;
     }
 
-    BitcoinExchange btc;
-    btc.parseFile(av[1]);
-
+    try{
+        BitcoinExchange btc;
+        btc.parseFile(av[1]);
+    } catch (std::exception &e){
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
+    }
+    return 0;
 }
