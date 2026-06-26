@@ -1,9 +1,4 @@
 #include "BitcoinExchange.hpp"
-#include <cstdio>
-#include <fstream>
-#include <iterator>
-#include <stdexcept>
-#include <string>
 
 BitcoinExchange::BitcoinExchange() {
     loadDatabase();
