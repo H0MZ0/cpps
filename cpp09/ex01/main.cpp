@@ -7,7 +7,8 @@ int main(int ac, char **av) {
     }
 
     RPN rpn;
-    rpn.evaluate(av[1]);
+    if(!rpn.evaluate(av[1]))
+        return 1;
     
     return 0;
 }

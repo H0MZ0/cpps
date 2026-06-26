@@ -12,7 +12,7 @@ private:
     std::stack<int> _stack;
 
     bool isOperator(char c);
-    int  calculate(int a, int b, char op);
+    bool calculate(int a, int b, char op, int &result);
 
 public:
     RPN();
@@ -20,8 +20,7 @@ public:
     RPN &operator=(const RPN &other);
     ~RPN();
 
-    void evaluate(const std::string &expr);
-    bool calculate(int a, int b, char op, int &result);
+    bool evaluate(const std::string &expr);
 };
 
 #endif

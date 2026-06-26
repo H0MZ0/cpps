@@ -34,19 +34,23 @@ bool RPN::calculate(int a, int b, char op, int &result) {
     return true;
 }
 
-void RPN::evaluate(const std::string &expr) {
+bool RPN::evaluate(const std::string &expr) {
     std::stringstream ss(expr);
     std::string token;
 
+    while (!_stack.empty()) {
+        _stack.pop();
+    }
+
     if (expr.find_first_not_of(" \t") == std::string::npos) {
         std::cerr << "Error" << std::endl;
-        return;
+        return false;
     }
 
     while (ss >> token) {
         if (token.length() != 1) {
             std::cerr << "Error" << std::endl;
-            return;
+            return false;
         }
 
         char c = token[0];
@@ -57,7 +61,7 @@ void RPN::evaluate(const std::string &expr) {
         else if (isOperator(c)) {
             if (_stack.size() < 2) {
                 std::cerr << "Error" << std::endl;
-                return;
+                return false;
             }
             int b = _stack.top(); _stack.pop();
             int a = _stack.top(); _stack.pop();
@@ -65,19 +69,21 @@ void RPN::evaluate(const std::string &expr) {
             int result = 0;
             if (!calculate(a, b, c, result)) {
                 std::cerr << "Error" << std::endl;
-                return;
+                return false;
             }
             _stack.push(result);
         } 
         else {
             std::cerr << "Error" << std::endl;
-            return;
+            return false;
         }
     }
 
     if (_stack.size() != 1) {
         std::cerr << "Error" << std::endl;
+        return false;
     } else {
         std::cout << _stack.top() << std::endl;
     }
+    return true;
 }
