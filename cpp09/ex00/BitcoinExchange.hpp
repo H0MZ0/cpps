@@ -27,6 +27,8 @@ class BitcoinExchange {
       BitcoinExchange& operator=(const BitcoinExchange &other);
       ~BitcoinExchange();
       void parseFile(char *File);
+      void processLine(const std::string &line);
+
 };
 
 #endif
