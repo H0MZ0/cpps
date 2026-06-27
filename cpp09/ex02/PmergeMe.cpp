@@ -104,30 +104,35 @@ void recursiveSortVector(std::vector<int>& vec) {
     recursiveSortVector(largerElements);
 
     std::vector<int> mainChain = largerElements;
-    std::vector<int> pend;
-
-    for (size_t i = 0; i < mainChain.size(); i++) {
-        for (size_t j = 0; j < pairs.size(); j++) {
-            if (mainChain[i] == pairs[j].first) {
-                pend.push_back(pairs[j].second);
-                break;
-            }
-        }
+    
+    std::vector<int> pend(mainChain.size(), -1); 
+    for (size_t i = 0; i < pairs.size(); i++) {
+        std::vector<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), pairs[i].first);
+        size_t index = std::distance(mainChain.begin(), it);
+        pend[index] = pairs[i].second;
     }
 
-    if (!pend.empty()) mainChain.insert(mainChain.begin(), pend[0]);
+    if (!pend.empty() && pend[0] != -1) {
+        mainChain.insert(mainChain.begin(), pend[0]);
+    }
 
-    size_t jacobIndex = 3;
+    size_t jacobIndex = 3; 
+    size_t prevJacob = 1;
     size_t insertedCount = 1;
-    while (insertedCount < pend.size()) {
-        size_t targetJacob = getJacobsthalNumber(jacobIndex);
-        if (targetJacob > pend.size()) targetJacob = pend.size();
 
-        for (size_t i = targetJacob - 1; i >= insertedCount; i--) {
-            std::vector<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), pend[i]);
-            mainChain.insert(it, pend[i]);
+    while (insertedCount < pend.size()) {
+        size_t currJacob = getJacobsthalNumber(jacobIndex);
+        size_t endPoint = (currJacob > pend.size()) ? pend.size() : currJacob;
+
+        for (size_t i = endPoint - 1; i >= prevJacob; i--) {
+            if (pend[i] != -1) {
+                std::vector<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), pend[i]);
+                mainChain.insert(it, pend[i]);
+                insertedCount++;
+            }
+            if (i == prevJacob) break;
         }
-        insertedCount = targetJacob;
+        prevJacob = endPoint;
         jacobIndex++;
     }
 
@@ -163,30 +168,35 @@ void recursiveSortDeque(std::deque<int>& deq) {
     recursiveSortDeque(largerElements);
 
     std::deque<int> mainChain = largerElements;
-    std::deque<int> pend;
-
-    for (size_t i = 0; i < mainChain.size(); i++) {
-        for (size_t j = 0; j < pairs.size(); j++) {
-            if (mainChain[i] == pairs[j].first) {
-                pend.push_back(pairs[j].second);
-                break;
-            }
-        }
+    
+    std::deque<int> pend(mainChain.size(), -1);
+    for (size_t i = 0; i < pairs.size(); i++) {
+        std::deque<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), pairs[i].first);
+        size_t index = std::distance(mainChain.begin(), it);
+        pend[index] = pairs[i].second;
     }
 
-    if (!pend.empty()) mainChain.push_front(pend[0]);
+    if (!pend.empty() && pend[0] != -1) {
+        mainChain.push_front(pend[0]);
+    }
 
     size_t jacobIndex = 3;
+    size_t prevJacob = 1; 
     size_t insertedCount = 1;
-    while (insertedCount < pend.size()) {
-        size_t targetJacob = getJacobsthalNumber(jacobIndex);
-        if (targetJacob > pend.size()) targetJacob = pend.size();
 
-        for (size_t i = targetJacob - 1; i >= insertedCount; i--) {
-            std::deque<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), pend[i]);
-            mainChain.insert(it, pend[i]);
+    while (insertedCount < pend.size()) {
+        size_t currJacob = getJacobsthalNumber(jacobIndex);
+        size_t endPoint = (currJacob > pend.size()) ? pend.size() : currJacob;
+
+        for (size_t i = endPoint - 1; i >= prevJacob; i--) {
+            if (pend[i] != -1) {
+                std::deque<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), pend[i]);
+                mainChain.insert(it, pend[i]);
+                insertedCount++;
+            }
+            if (i == prevJacob) break;
         }
-        insertedCount = targetJacob;
+        prevJacob = endPoint;
         jacobIndex++;
     }
 
