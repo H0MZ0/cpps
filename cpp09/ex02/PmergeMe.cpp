@@ -54,11 +54,6 @@ bool PmergeMe::parsing(int ac, char **args) {
         
         int n = static_cast<int>(num);
 
-        if (std::find(_vCont.begin(), _vCont.end(), n) != _vCont.end()) {
-            std::cerr << "Error" << std::endl;
-            return false;
-        }
-
         _dCont.push_back(n);
         _vCont.push_back(n);
     }
@@ -82,7 +77,6 @@ size_t getJacobsthalNumber(size_t n) {
     if (n == 1) return 1;
     return getJacobsthalNumber(n - 1) + 2 * getJacobsthalNumber(n - 2);
 }
-
 void recursiveSortVector(std::vector<int>& vec) {
     if (vec.size() <= 1) return;
 
@@ -104,15 +98,19 @@ void recursiveSortVector(std::vector<int>& vec) {
     recursiveSortVector(largerElements);
 
     std::vector<int> mainChain = largerElements;
-    
-    std::vector<int> pend(mainChain.size(), -1); 
-    for (size_t i = 0; i < pairs.size(); i++) {
-        std::vector<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), pairs[i].first);
-        size_t index = std::distance(mainChain.begin(), it);
-        pend[index] = pairs[i].second;
+    std::vector<int> pend;
+
+    for (size_t i = 0; i < mainChain.size(); i++) {
+        for (size_t j = 0; j < pairs.size(); j++) {
+            if (mainChain[i] == pairs[j].first) {
+                pend.push_back(pairs[j].second);
+                pairs[j].first = -1;
+                break;
+            }
+        }
     }
 
-    if (!pend.empty() && pend[0] != -1) {
+    if (!pend.empty()) {
         mainChain.insert(mainChain.begin(), pend[0]);
     }
 
@@ -125,11 +123,10 @@ void recursiveSortVector(std::vector<int>& vec) {
         size_t endPoint = (currJacob > pend.size()) ? pend.size() : currJacob;
 
         for (size_t i = endPoint - 1; i >= prevJacob; i--) {
-            if (pend[i] != -1) {
-                std::vector<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), pend[i]);
-                mainChain.insert(it, pend[i]);
-                insertedCount++;
-            }
+            std::vector<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), pend[i]);
+            mainChain.insert(it, pend[i]);
+            insertedCount++;
+            
             if (i == prevJacob) break;
         }
         prevJacob = endPoint;
@@ -141,10 +138,6 @@ void recursiveSortVector(std::vector<int>& vec) {
         mainChain.insert(it, straggler);
     }
     vec = mainChain;
-}
-
-void PmergeMe::sortVector() {
-    recursiveSortVector(this->_vCont);
 }
 
 void recursiveSortDeque(std::deque<int>& deq) {
@@ -168,15 +161,19 @@ void recursiveSortDeque(std::deque<int>& deq) {
     recursiveSortDeque(largerElements);
 
     std::deque<int> mainChain = largerElements;
-    
-    std::deque<int> pend(mainChain.size(), -1);
-    for (size_t i = 0; i < pairs.size(); i++) {
-        std::deque<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), pairs[i].first);
-        size_t index = std::distance(mainChain.begin(), it);
-        pend[index] = pairs[i].second;
+    std::deque<int> pend;
+
+    for (size_t i = 0; i < mainChain.size(); i++) {
+        for (size_t j = 0; j < pairs.size(); j++) {
+            if (mainChain[i] == pairs[j].first) {
+                pend.push_back(pairs[j].second);
+                pairs[j].first = -1;
+                break;
+            }
+        }
     }
 
-    if (!pend.empty() && pend[0] != -1) {
+    if (!pend.empty()) {
         mainChain.push_front(pend[0]);
     }
 
@@ -189,11 +186,10 @@ void recursiveSortDeque(std::deque<int>& deq) {
         size_t endPoint = (currJacob > pend.size()) ? pend.size() : currJacob;
 
         for (size_t i = endPoint - 1; i >= prevJacob; i--) {
-            if (pend[i] != -1) {
-                std::deque<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), pend[i]);
-                mainChain.insert(it, pend[i]);
-                insertedCount++;
-            }
+            std::deque<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), pend[i]);
+            mainChain.insert(it, pend[i]);
+            insertedCount++;
+            
             if (i == prevJacob) break;
         }
         prevJacob = endPoint;
@@ -209,4 +205,8 @@ void recursiveSortDeque(std::deque<int>& deq) {
 
 void PmergeMe::sortDeque() {
     recursiveSortDeque(this->_dCont);
+}
+
+void PmergeMe::sortVector() {
+    recursiveSortVector(this->_vCont);
 }
